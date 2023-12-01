@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <ctype.h>
+#include <string.h>
 
 #define MAX_SIZE 100
 
@@ -57,9 +59,9 @@ float evaluateExpression(char *expression) {
             float b = pop(&s);
             float a = pop(&s);
             push(&s, pow(a, b));
-        } else if (strcmp(token, "sqrt") == 0) {
+        } else if (strcmp(token, "log") == 0) {
             float a = pop(&s);
-            push(&s, sqrt(a));
+            push(&s, log10(a));
         } else {
             printf("Operação não suportada: %s\n", token);
             exit(EXIT_FAILURE);
@@ -73,15 +75,12 @@ float evaluateExpression(char *expression) {
 
 int main() {
     char expression[MAX_SIZE];
-    
+
+    // Teste 1: 3 4 + 5 *
     printf("Digite a expressão em notação posfixa: ");
     fgets(expression, MAX_SIZE, stdin);
-
     float result = evaluateExpression(expression);
     printf("Resultado: %.2f\n", result);
 
     return 0;
 }
-
-
-/*Digite os valores: dando espaço entre todos os caracteres.*/
